@@ -8,9 +8,7 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Replace "demo" with your own API key for production use
-    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=QJ3OHFW9EIW6MV4R')
-    // fetch('https://financialmodelingprep.com/stable/sp500-constituent')   
+    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SXR8.DEX&outputsize=full&apikey=QJ3OHFW9EIW6MV4R')
       .then(response => response.json())
       .then(json => setData(json))
       .catch(error => console.error('Error fetching data:', error));
@@ -18,15 +16,16 @@ function App() {
 
   // Prepare chart data
   let chartData = null;
-  if (data && data['Time Series (5min)']) {
-    const timeSeries = data['Time Series (5min)'];
-    const labels = Object.keys(timeSeries).reverse().slice(0, 20); // last 20 points
-    const prices = labels.map(time => parseFloat(timeSeries[time]['1. open']));
+  if (data && data['Time Series (Daily)']) {
+    const timeSeries = data['Time Series (Daily)'];
+    const allDates = Object.keys(timeSeries);
+    const last20Dates = allDates.slice(0, 20).reverse(); // get latest 20, then reverse for chronological order
+    const prices = last20Dates.map(date => parseFloat(timeSeries[date]['1. open']));
     chartData = {
-      labels,
+      labels: last20Dates,
       datasets: [
         {
-          label: 'IBM Open Price',
+          label: 'S&P 500 Price',
           data: prices,
           fill: false,
           borderColor: '#1976d2', // more visible blue line
@@ -34,7 +33,7 @@ function App() {
           tension: 0.1,
           borderWidth: 3,         // thicker line
           pointRadius: 4,         // slightly larger points
-          // showLine: true,         // ensure line is shown
+          showLine: true,         // ensure line is shown
         },
       ],
     };
@@ -55,7 +54,7 @@ function App() {
       boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
       flexDirection: 'column'
     }}>
-      <div style={{marginBottom: 20, fontSize: '1.5rem'}}>IBM 5min Open Price Chart</div>
+      <div style={{marginBottom: 20, fontSize: '1.5rem'}}>Графiк росту активa</div>
       {chartData ? (
         <div style={{background: '#fff', borderRadius: 8, padding: 24, width: 900}}>
           <Line data={chartData} options={{responsive: true, plugins: {legend: {labels: {color: '#1976d2'}}}}} />
