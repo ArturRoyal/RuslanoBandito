@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/RuslanoBandito/static/js/main.048af4ce.js",
+    "main.js": "/RuslanoBandito/static/js/main.596cb8ff.js",
     "index.html": "/RuslanoBandito/index.html",
-    "main.048af4ce.js.map": "/RuslanoBandito/static/js/main.048af4ce.js.map"
+    "main.596cb8ff.js.map": "/RuslanoBandito/static/js/main.596cb8ff.js.map"
   },
   "entrypoints": [
-    "static/js/main.048af4ce.js"
+    "static/js/main.596cb8ff.js"
   ]
 }
