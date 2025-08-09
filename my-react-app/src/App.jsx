@@ -83,11 +83,12 @@ function LoginPage({ onLogin }) {
 function MainPage({ lastPrice, chartData }) {
   return (
     <div style={{
-      width: '1020px',
-      height: '800px',
+      maxWidth: '390px', // iPhone 12 screen width
+      width: '100vw',
+      minHeight: '100vh',
       background: '#1976d2',
       borderRadius: '12px',
-      margin: '60px auto',
+      margin: '0 auto',
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
@@ -95,22 +96,22 @@ function MainPage({ lastPrice, chartData }) {
       fontSize: '1.1rem',
       boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
       flexDirection: 'column',
-      paddingLeft: 0,
-      padding: '40px 0 0 40px'
+      padding: '24px 8px 0 8px',
+      boxSizing: 'border-box'
     }}>
-      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: 10 }}>
+      <div style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: 10 }}>
         Стартовий вклад:  {startPrice} €
       </div>
-      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: 10 }}>
+      <div style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: 10 }}>
         {lastPrice !== null ? `Цiна капiталу зараз: ${(lastPrice * coef).toFixed(2)} €` : 'Loading...'}
       </div>
-      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: 10 }}>
+      <div style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: 10 }}>
         {lastPrice !== null ? `Чиста прибиль (приблизно): ${(lastPrice * coef - startPrice - 10).toFixed(2)} €` : 'Loading...'}
       </div>
       <div
         style={{
           marginBottom: 20,
-          fontSize: '1.5rem',
+          fontSize: '1.1rem',
           width: '100%',
           textAlign: 'center'
         }}
@@ -118,8 +119,17 @@ function MainPage({ lastPrice, chartData }) {
         Графiк росту активa по дням
       </div>
       {chartData ? (
-        <div style={{ background: '#fff', borderRadius: 8, padding: 24, width: 900 }}>
-          <Line data={chartData} options={{ responsive: true, plugins: { legend: { labels: { color: '#1976d2' } } } }} />
+        <div style={{ background: '#fff', borderRadius: 8, padding: 8, width: '100%', boxSizing: 'border-box' }}>
+          <Line
+            data={chartData}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { labels: { color: '#1976d2' } } },
+              layout: { padding: 0 }
+            }}
+            height={220}
+          />
         </div>
       ) : (
         <div>Loading...</div>
