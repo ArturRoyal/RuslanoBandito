@@ -103,7 +103,7 @@ function MainPage({ lastPrice, chartData }) {
         Стартовий вклад:  {startPrice} €
       </div>
       <div style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: 10 }}>
-        {lastPrice !== null ? `Цiна капiталу сьогодні: ${(lastPrice * coef).toFixed(2)} €` : 'Loading...'}
+        {lastPrice !== null ? `Цiна капiталу зараз: ${(lastPrice * coef).toFixed(2)} €` : 'Loading...'}
       </div>
       <div style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: 10 }}>
         {lastPrice !== null ? `Чиста прибиль (приблизно): ${(lastPrice * coef - startPrice - 10).toFixed(2)} €` : 'Loading...'}
