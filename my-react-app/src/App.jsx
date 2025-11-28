@@ -143,7 +143,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SXR8.DEX&outputsize=full&apikey=QJ3OHFW9EIW6MV4R')
+    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SXR8.DEX&apikey=QJ3OHFW9EIW6MV4R')
       .then(response => response.json())
       .then(json => setData(json))
       .catch(error => console.error('Error fetching data:', error));
